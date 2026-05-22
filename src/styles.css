@@ -533,7 +533,29 @@ main, .nav-shell, .footer { position: relative; z-index: 1; }
     min-height: auto;
     padding-top: 58px;
   }
-  .hero h1 { font-size: clamp(3.35rem, 17vw, 5rem); }
+  .hero-copy,
+  .hero-art {
+    max-width: 330px;
+  }
+  .hero .eyebrow {
+    max-width: 330px;
+    letter-spacing: 0.22em;
+    line-height: 1.6;
+  }
+  .hero h1 {
+    max-width: 330px;
+    font-size: clamp(3rem, 13vw, 3.15rem);
+    line-height: 0.96;
+  }
+  .cta {
+    width: 100%;
+    padding: 0 18px;
+    letter-spacing: 0.1em;
+    font-size: 0.66rem;
+  }
+  .bitcoin-sigil {
+    width: 100%;
+  }
   .mission-copy { padding-left: 0; border-left: 0; }
   .channel-grid { grid-template-columns: 1fr 1fr; }
   .footer-newsletter,
