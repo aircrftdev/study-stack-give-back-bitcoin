@@ -242,11 +242,11 @@ main,
 
 .hero-copy h1 {
   margin: 28px 0 22px;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: clamp(4.4rem, 6.35vw, 6.8rem);
   line-height: 0.96;
   font-weight: 800;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.045em;
 }
 
 .hero-copy h1 span {
