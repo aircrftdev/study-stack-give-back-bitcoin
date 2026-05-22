@@ -1,315 +1,308 @@
 import {
   ArrowRight,
   BookOpen,
-  Coins,
-  Globe2,
-  HandHeart,
-  Mail,
-  Menu,
-  Mic2,
-  Network,
+  Check,
+  Heart,
+  Layers3,
+  Play,
+  Podcast,
   Radio,
-  Signal,
+  Shield,
+  Twitter,
   Youtube,
   Zap,
 } from 'lucide-react'
 
-const pillars = [
-  {
-    icon: BookOpen,
-    label: 'Study',
-    title: 'The most important Bitcoin ideas, right now.',
-    copy: 'Breakthroughs, monetary history, tools, books, podcasts, essays, builders, and conversations worth your scarce attention.',
-    items: ['Bitcoin breakthroughs', 'Monetary history', 'Self-custody guides', 'AI + Bitcoin', 'Books, podcasts & essays', 'Tools and builders'],
-  },
-  {
-    icon: Zap,
-    label: 'Stack',
-    title: 'Real-world strategies for patient accumulation.',
-    copy: 'Work, creativity, discipline, business, and asymmetric opportunities translated into durable Bitcoin habits.',
-    items: ['DCA systems', 'Bitcoin side hustles', 'Treasury strategies', 'Lifestyle design', 'Income-to-Bitcoin pipelines', 'Real case studies'],
-  },
-  {
-    icon: HandHeart,
-    label: 'Give Back',
-    title: 'Strengthen the network that protects your future.',
-    copy: 'Education, nodes, mining, open-source support, circular economies, and helping people cross the Bitcoin Rubicon.',
-    items: ['Run a node', 'Mine with Bitaxe', 'Support open-source developers', 'Teach friends & family', 'Build tools', 'Create content'],
-  },
-] as const
-
-const signalPoints = ['education over hype', 'conviction over speculation', 'participation over passivity', 'long-term thinking over short-term noise']
-
-const channels = [
-  ['Nostr', Network],
-  ['YouTube', Youtube],
-  ['Rumble', Radio],
-  ['X/Twitter', Signal],
-  ['Podcasts', Mic2],
-  ['Email', Mail],
-] as const
-
-function Enso({ size = 'small' }: { size?: 'tiny' | 'small' | 'large' }) {
-  return <span className={`enso enso-${size}`} aria-hidden />
-}
+const studyItems = ['Bitcoin breakthroughs', 'Monetary history', 'Self-custody guides', 'AI + Bitcoin', 'Books, podcasts & essays', 'Tools and builders']
+const stackItems = ['DCA systems', 'Bitcoin side hustles', 'Treasury strategies', 'Lifestyle design', 'Income-to-Bitcoin pipelines', 'Real case studies']
+const giveItems = ['Run a node', 'Mine with Bitaxe', 'Support open-source devs', 'Teach friends & family', 'Build tools', 'Create content', 'Participate']
 
 function Logo() {
   return (
-    <a className="brand" href="#top" aria-label="Study Stack Give Back.bitcoin home">
-      <Enso />
+    <a href="#home" className="brand-lockup" aria-label="Study Stack Give Back home">
+      <span className="stack-mark" aria-hidden>
+        <span />
+        <span />
+        <span />
+      </span>
       <span>
         <strong>Study Stack</strong>
-        <em>Give Back.bitcoin</em>
+        <em>Give Back . bitcoin</em>
       </span>
     </a>
   )
 }
 
-function CTA({
-  children,
-  href,
-  variant = 'primary',
-}: {
-  children: React.ReactNode
-  href: string
-  variant?: 'primary' | 'secondary'
-}) {
+function Nav() {
   return (
-    <a className={`cta ${variant}`} href={href}>
-      <span>{children}</span>
+    <header className="site-nav">
+      <Logo />
+      <nav className="nav-links" aria-label="Primary navigation">
+        {['Home', 'Newsletter', 'This Week', 'About', 'Resources', 'Archive'].map((item, index) => (
+          <a className={index === 0 ? 'active' : ''} href={index === 0 ? '#home' : `#${item.toLowerCase().replaceAll(' ', '-')}`} key={item}>
+            {item}
+          </a>
+        ))}
+      </nav>
+      <div className="nav-actions">
+        <a className="bolt-button" href="#this-week" aria-label="This week's signal">
+          <Zap size={20} fill="currentColor" />
+        </a>
+        <a className="cta-btn nav-cta" href="#newsletter">
+          Subscribe <ArrowRight size={17} />
+        </a>
+      </div>
+    </header>
+  )
+}
+
+function PillButton({ children, href, variant = 'primary' }: { children: React.ReactNode; href: string; variant?: 'primary' | 'ghost' }) {
+  return (
+    <a className={`pill-btn ${variant}`} href={href}>
+      {children}
       <ArrowRight size={17} />
     </a>
   )
 }
 
-function Navbar() {
-  const links = [
-    ['Study', '#study'],
-    ['Stack', '#stack'],
-    ['Give Back', '#give-back'],
-    ['Signal', '#signal'],
-    ['Community', '#community'],
-  ]
-
+function HeroArt() {
   return (
-    <header className="nav-shell">
-      <Logo />
-      <nav className="nav-links" aria-label="Primary navigation">
-        {links.map(([label, href]) => (
-          <a key={href} href={href}>
-            {label}
-          </a>
-        ))}
-      </nav>
-      <div className="nav-actions">
-        <CTA href="#subscribe">Subscribe</CTA>
+    <div className="hero-art" aria-label="Bitcoin pillars artwork">
+      <div className="coin-orbit">
+        <span>₿</span>
       </div>
-      <details className="mobile-menu">
-        <summary aria-label="Open navigation">
-          <Menu size={22} />
-        </summary>
-        <div>
-          {links.map(([label, href]) => (
-            <a key={href} href={href}>
-              {label}
-            </a>
-          ))}
-          <a className="mobile-cta" href="#subscribe">
-            Subscribe
-          </a>
+      <div className="neon-road" />
+      <div className="mountain-range" />
+      <div className="pillar-stack">
+        <div className="glass-block study-block">
+          <BookOpen size={40} />
+          <div>
+            <strong>STUDY</strong>
+            <span>Understand Bitcoin deeply</span>
+          </div>
         </div>
-      </details>
-    </header>
-  )
-}
-
-function NewsletterForm({ compact = false }: { compact?: boolean }) {
-  return (
-    <form
-      className={`newsletter-form ${compact ? 'compact' : ''}`}
-      onSubmit={(event) => {
-        event.preventDefault()
-      }}
-    >
-      <label>
-        <span>Email address</span>
-        <input type="email" placeholder="Enter your email" required />
-      </label>
-      <button type="submit">Subscribe</button>
-    </form>
-  )
-}
-
-function SectionHeader({
-  eyebrow,
-  title,
-  copy,
-  center = false,
-}: {
-  eyebrow: string
-  title: string
-  copy?: string
-  center?: boolean
-}) {
-  return (
-    <div className={`section-header ${center ? 'center' : ''}`}>
-      <Enso size="tiny" />
-      <p className="eyebrow">{eyebrow}</p>
-      <h2>{title}</h2>
-      {copy ? <p>{copy}</p> : null}
+        <div className="glass-block stack-block">
+          <Layers3 size={40} />
+          <div>
+            <strong>STACK</strong>
+            <span>Build wealth and freedom</span>
+          </div>
+        </div>
+        <div className="glass-block give-block">
+          <Heart size={40} />
+          <div>
+            <strong>GIVE BACK</strong>
+            <span>Strengthen the Bitcoin network</span>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
 
-function PillarCard({ pillar, id }: { pillar: (typeof pillars)[number]; id: string }) {
-  const Icon = pillar.icon
-
+function Checklist({ items, tone }: { items: string[]; tone: 'purple' | 'orange' | 'green' }) {
   return (
-    <article className="pillar-card" id={id}>
-      <div className="pillar-topline">
-        <span>
-          <Icon size={22} strokeWidth={1.6} />
-        </span>
-        <p>{pillar.label}</p>
-      </div>
-      <h3>{pillar.title}</h3>
-      <p>{pillar.copy}</p>
-      <ul>
-        {pillar.items.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
+    <ul className={`check-list ${tone}`}>
+      {items.map((item) => (
+        <li key={item}>
+          <Check size={14} />
+          {item}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function PillarCard({
+  tone,
+  icon,
+  title,
+  question,
+  items,
+}: {
+  tone: 'purple' | 'orange' | 'green'
+  icon: React.ReactNode
+  title: string
+  question: string
+  items: string[]
+}) {
+  return (
+    <article className={`pillar-card ${tone}`}>
+      <div className="icon-disc">{icon}</div>
+      <h3>{title}</h3>
+      <p>{question}</p>
+      <Checklist items={items} tone={tone} />
+      <a className="outline-link" href={`#${title.toLowerCase().replaceAll(' ', '-')}`}>
+        Explore {title} <ArrowRight size={16} />
+      </a>
     </article>
   )
 }
 
-function Layout({ children }: { children: React.ReactNode }) {
+function SignalPanel() {
   return (
-    <div className="site-frame" id="top">
-      <div className="paper-grain" aria-hidden />
-      <Navbar />
-      <main>{children}</main>
-      <footer className="footer">
-        <div className="footer-newsletter">
-          <div>
-            <p className="eyebrow">Your participation is essential.</p>
-            <h2>Study. Stack. Give Back.</h2>
+    <section className="signal-news-grid" id="this-week">
+      <article className="panel signal-panel">
+        <div className="panel-head">
+          <h2>This Week’s Signal</h2>
+          <a href="#archive">View all issues</a>
+        </div>
+        <div className="feature-signal">
+          <div className="safe-art">
+            <Shield size={62} />
+            <span>₿</span>
           </div>
-          <NewsletterForm compact />
+          <div>
+            <span className="badge">Featured</span>
+            <h3>Self-Custody in 2024: Beyond the Basics</h3>
+            <p>A practical guide to owning your future with confidence.</p>
+            <div className="tag-row">
+              <span>Study</span>
+              <span>Stack</span>
+              <span>Give Back</span>
+            </div>
+          </div>
         </div>
-        <div className="footer-grid">
-          <Logo />
-          <p>Study Bitcoin. Stack Bitcoin. Give Back.</p>
-          <p>A weekly signal in a world of noise. ₿</p>
-          <p>∞/21M</p>
+      </article>
+
+      <article className="panel newsletter-panel" id="newsletter">
+        <h2>Weekly Newsletter</h2>
+        <p>Three ideas. Every week. Straight to your inbox.</p>
+        <form
+          className="subscribe-form"
+          onSubmit={(event) => {
+            event.preventDefault()
+          }}
+        >
+          <label>
+            <span>Email address</span>
+            <input type="email" placeholder="Enter your email address" required />
+          </label>
+          <button type="submit">
+            Subscribe Now <ArrowRight size={17} />
+          </button>
+        </form>
+        <div className="newsletter-notes">
+          <span>
+            <Check size={16} /> Free. Unsubscribe anytime.
+          </span>
+          <span>
+            <Check size={16} /> No spam. Just Bitcoin.
+          </span>
         </div>
-      </footer>
-    </div>
+      </article>
+    </section>
+  )
+}
+
+function Community() {
+  const channels = [
+    { icon: <Zap size={34} fill="currentColor" />, name: 'Nostr', copy: 'Decentralized conversations', handle: 'npub...study...stack', tone: 'purple' },
+    { icon: <Youtube size={34} fill="currentColor" />, name: 'YouTube', copy: 'Weekly videos & deep dives', handle: '@StudyStackBitcoin', tone: 'red' },
+    { icon: <Play size={34} fill="currentColor" />, name: 'Rumble', copy: 'Watch & share on Rumble', handle: '@StudyStackBitcoin', tone: 'green' },
+    { icon: <Twitter size={34} />, name: 'X / Twitter', copy: 'Daily signals & updates', handle: '@StudyStackBTC', tone: 'blue' },
+    { icon: <Podcast size={34} />, name: 'Podcast', copy: 'Long-form conversations with builders', handle: 'Coming Soon', tone: 'purple' },
+  ]
+
+  return (
+    <section className="community-section" id="resources">
+      <div className="section-row">
+        <h2>Join the Movement</h2>
+        <p>We publish across the platforms where Bitcoiners learn, build and connect.</p>
+      </div>
+      <div className="channel-grid">
+        {channels.map((channel) => (
+          <a className={`channel-card ${channel.tone}`} href="#newsletter" key={channel.name}>
+            {channel.icon}
+            <div>
+              <h3>{channel.name}</h3>
+              <p>{channel.copy}</p>
+              <span>{channel.handle}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <Logo />
+      <div className="footer-motto">
+        <p>Your participation is essential.</p>
+        <p>
+          Study. Stack. Give Back. <span>∞ / 21M</span>
+        </p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="#about">About</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#terms">Terms</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </footer>
   )
 }
 
 export function HomePage() {
   return (
-    <Layout>
-      <section className="hero">
-        <div className="hero-copy reveal">
-          <p className="eyebrow">A weekly signal in a world of noise. ₿</p>
-          <h1>Study Stack Give Back.bitcoin</h1>
-          <p className="subtitle">Study Bitcoin. Stack Bitcoin. Give Back.</p>
-          <p className="hero-text">
-            Bitcoin is more than an investment. It is an invitation to participate.
-          </p>
-          <div className="button-row">
-            <CTA href="#subscribe">Subscribe to the Weekly Newsletter</CTA>
-            <CTA href="#signal" variant="secondary">
-              Explore This Week’s Signal
-            </CTA>
+    <>
+      <div className="noise-overlay" aria-hidden />
+      <div className="page-glow" aria-hidden />
+      <Nav />
+      <main>
+        <section className="hero-section" id="home">
+          <div className="hero-copy">
+            <span className="tag-chip">
+              <span />
+              Study. Stack. Give Back.
+            </span>
+            <h1>
+              Study Bitcoin.
+              <br />
+              <span className="iridescent-text">Stack Bitcoin.</span>
+              <br />
+              <em className="iridescent-text">Give Back.</em>
+            </h1>
+            <p>A weekly signal in a world of noise. Three pillars. One mission: to help you learn, build wealth, and strengthen Bitcoin.</p>
+            <div className="hero-actions">
+              <PillButton href="#newsletter">Subscribe to the Weekly Newsletter</PillButton>
+              <PillButton href="#this-week" variant="ghost">
+                Explore This Week’s Signal
+              </PillButton>
+            </div>
+            <div className="social-proof">
+              <div className="avatar-stack" aria-hidden>
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
+              <p>Join 12,847+ Bitcoiners building the future.</p>
+            </div>
           </div>
-          <p className="microcopy">Three powerful ideas. Every week. Straight to your inbox.</p>
-        </div>
-        <div className="hero-art reveal delay-1">
-          <div className="bitcoin-sigil">
-            <Enso size="large" />
-            <Coins size={104} strokeWidth={1.05} />
-            <span>21M</span>
+          <HeroArt />
+        </section>
+
+        <section className="pillars-section">
+          <div className="section-title">
+            <h2>3 Pillars. 1 Mission.</h2>
+            <p>Everything we do focuses on these three core subjects every week.</p>
           </div>
-        </div>
-      </section>
-
-      <section className="mission-section">
-        <SectionHeader
-          eyebrow="The Mission"
-          title="A new generation of Bitcoin citizens."
-          copy="Not tourists. Not gamblers. Participants."
-        />
-        <div className="mission-copy">
-          <p>People who understand Bitcoin deeply.</p>
-          <p>People who build long-term wealth responsibly.</p>
-          <p>People who contribute back to the network that protects their future.</p>
-        </div>
-      </section>
-
-      <section className="pillar-grid" aria-label="This week content structure">
-        <PillarCard pillar={pillars[0]} id="study" />
-        <PillarCard pillar={pillars[1]} id="stack" />
-        <PillarCard pillar={pillars[2]} id="give-back" />
-      </section>
-
-      <section className="signal-section" id="signal">
-        <div>
-          <SectionHeader
-            eyebrow="The Signal"
-            title="A calm, intelligent weekly Bitcoin briefing."
-            copy="No casino energy. No endless price obsession. Just signal."
-          />
-          <div className="signal-list">
-            {signalPoints.map((point) => (
-              <span key={point}>{point}</span>
-            ))}
+          <div className="pillar-grid">
+            <PillarCard tone="purple" icon={<BookOpen size={34} />} title="STUDY" question="What’s worth learning this week?" items={studyItems} />
+            <PillarCard tone="orange" icon={<Layers3 size={34} />} title="STACK" question="How are people stacking in the real world?" items={stackItems} />
+            <PillarCard tone="green" icon={<Heart size={34} />} title="GIVE BACK" question="How do we strengthen the network?" items={giveItems} />
           </div>
-          <div className="button-row">
-            <CTA href="#subscribe">Study something important</CTA>
-            <CTA href="#give-back" variant="secondary">
-              Give back stronger
-            </CTA>
-          </div>
-        </div>
-        <div className="ink-panel" aria-hidden>
-          <Radio size={92} strokeWidth={1.1} />
-          <Enso size="large" />
-        </div>
-      </section>
+        </section>
 
-      <section className="quote-band">
-        <p>“Your participation is essential.”</p>
-      </section>
-
-      <section className="community-section" id="community">
-        <SectionHeader
-          center
-          eyebrow="Join the Movement"
-          title="Wherever Bitcoiners gather to learn and build, we’ll be there."
-        />
-        <div className="channel-grid">
-          {channels.map(([label, Icon]) => (
-            <a href="#subscribe" key={label}>
-              <Icon size={22} strokeWidth={1.5} />
-              <span>{label}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section className="newsletter-section" id="subscribe">
-        <SectionHeader
-          center
-          eyebrow="The Weekly Briefing"
-          title="Three powerful ideas. Every week."
-          copy="Study something important. Stack smarter. Give back stronger."
-        />
-        <NewsletterForm />
-      </section>
-    </Layout>
+        <SignalPanel />
+        <Community />
+      </main>
+      <Footer />
+    </>
   )
 }
 
