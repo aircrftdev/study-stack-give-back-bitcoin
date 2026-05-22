@@ -250,31 +250,47 @@ main,
 }
 
 .hero-copy h1 span {
-  background: linear-gradient(100deg, #e75ad1 0%, #ff7868 36%, #ffd84a 100%);
+  background:
+    radial-gradient(circle at 14% 42%, rgba(255, 107, 186, 0.95) 0 13%, transparent 34%),
+    radial-gradient(circle at 36% 34%, rgba(255, 122, 96, 0.9) 0 16%, transparent 36%),
+    radial-gradient(circle at 59% 48%, rgba(255, 228, 86, 0.92) 0 15%, transparent 38%),
+    radial-gradient(circle at 81% 38%, rgba(124, 246, 93, 0.9) 0 14%, transparent 36%),
+    linear-gradient(100deg, #d66cff 0%, #ff7aa8 28%, #ffb65a 52%, #f4ff69 74%, #73f47d 100%);
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
-  background-size: 220% 100%;
-  animation: shimmer 4s linear infinite;
+  background-size: 170% 170%;
+  animation: auroraText 9s ease-in-out infinite alternate;
 }
 
 .hero-copy h1 em {
   font-style: normal;
-  background: linear-gradient(100deg, #ac62ff 0%, #66b4d1 48%, #7bef5e 100%);
+  background:
+    radial-gradient(circle at 12% 45%, rgba(172, 98, 255, 0.95) 0 15%, transparent 36%),
+    radial-gradient(circle at 38% 38%, rgba(96, 159, 255, 0.86) 0 16%, transparent 38%),
+    radial-gradient(circle at 62% 50%, rgba(104, 221, 198, 0.88) 0 16%, transparent 40%),
+    radial-gradient(circle at 84% 42%, rgba(124, 239, 93, 0.9) 0 14%, transparent 36%),
+    linear-gradient(100deg, #b46bff 0%, #8aa8ff 30%, #65cbd4 58%, #7bf05e 100%);
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
-  background-size: 220% 100%;
-  animation: shimmer 4s linear infinite reverse;
+  background-size: 170% 170%;
+  animation: auroraText 10s ease-in-out infinite alternate-reverse;
 }
 
 .iridescent-text {
-  background: linear-gradient(90deg, #ff6b9d 0%, #ffa855 16%, #ffec48 32%, #6ef59b 48%, #48d8f5 64%, #a78bfa 80%, #f472b6 100%);
-  background-size: 220% 100%;
+  background:
+    radial-gradient(circle at 12% 40%, rgba(255, 107, 157, 0.95) 0 12%, transparent 34%),
+    radial-gradient(circle at 32% 54%, rgba(255, 168, 85, 0.9) 0 14%, transparent 36%),
+    radial-gradient(circle at 52% 36%, rgba(255, 236, 72, 0.92) 0 13%, transparent 35%),
+    radial-gradient(circle at 70% 50%, rgba(110, 245, 155, 0.9) 0 14%, transparent 36%),
+    radial-gradient(circle at 88% 42%, rgba(167, 139, 250, 0.9) 0 13%, transparent 34%),
+    linear-gradient(90deg, #ff6b9d 0%, #ffa855 20%, #ffec48 38%, #6ef59b 58%, #48d8f5 76%, #a78bfa 100%);
+  background-size: 175% 175%;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
-  animation: shimmer 4s linear infinite;
+  animation: auroraText 9s ease-in-out infinite alternate;
 }
 
 .hero-copy p {
@@ -928,6 +944,12 @@ main,
 @keyframes shimmer {
   0% { background-position: 0% 50%; }
   100% { background-position: 220% 50%; }
+}
+
+@keyframes auroraText {
+  0% { background-position: 0% 48%; filter: saturate(1.02) brightness(1); }
+  45% { background-position: 58% 42%; filter: saturate(1.14) brightness(1.06); }
+  100% { background-position: 100% 56%; filter: saturate(1.06) brightness(1.02); }
 }
 
 @keyframes coinPulse {
