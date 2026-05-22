@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Syne:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
 @import "tailwindcss" source("../");
 
 :root {
@@ -16,7 +16,7 @@
   --yellow: #efff54;
   --green: #7cf65d;
   --blue: #62b9ff;
-  --font-display: "Syne", system-ui, sans-serif;
+  --font-display: "Inter", system-ui, sans-serif;
   --font-body: "Outfit", system-ui, sans-serif;
   --font-mono: "Space Mono", ui-monospace, monospace;
 }
@@ -245,40 +245,27 @@ main,
   font-family: var(--font-display);
   font-size: clamp(4.4rem, 6.35vw, 6.8rem);
   line-height: 0.96;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: -0.055em;
 }
 
-.hero-copy h1,
-.section-title h2,
-.panel h2,
-.community-section h2,
-.pillar-card h3,
-.feature-signal h3,
-.channel-card h3 {
-  background: linear-gradient(90deg, #f0f0ff 0%, #f0f0ff 23%, #8fa2ff 35%, #c084fc 48%, #ff6b9d 61%, #ffa855 75%, #ffec48 88%, #6ef59b 100%);
-  background-size: 220% 100%;
+.hero-copy h1 span {
+  background: linear-gradient(100deg, #e75ad1 0%, #ff7868 36%, #ffd84a 100%);
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
+  background-size: 220% 100%;
   animation: shimmer 4s linear infinite;
-}
-
-.hero-copy h1 span {
-  background: inherit;
-  -webkit-text-fill-color: inherit;
-  background-clip: inherit;
-  -webkit-background-clip: inherit;
-  animation: inherit;
 }
 
 .hero-copy h1 em {
   font-style: normal;
-  background: inherit;
-  -webkit-text-fill-color: inherit;
-  background-clip: inherit;
-  -webkit-background-clip: inherit;
-  animation: inherit;
+  background: linear-gradient(100deg, #ac62ff 0%, #66b4d1 48%, #7bef5e 100%);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-size: 220% 100%;
+  animation: shimmer 4s linear infinite reverse;
 }
 
 .iridescent-text {
